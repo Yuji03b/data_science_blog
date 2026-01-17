@@ -1,0 +1,58 @@
+---
+title: "Why Simple Models Are Sometimes Better"
+subtitle: "What poverty targeting in public policy reveals about the limits of complex machine learning models"
+author: "Yanxin Liang"
+date: 2026-01-18
+bibliography: ../../references.bib
+---
+
+Machine learning models are widely used in real-world decision-making. In banking, predictive models estimate the risk of loan default. In healthcare, models assess patient risk and help allocate medical resources. In data science, there is a common assumption that more complex models lead to better outcomes. Random forests, gradient boosting, and neural networks are often preferred because they can capture complex patterns and achieve higher predictive accuracy.
+
+However, this assumption begins to break down when models move from prediction to decision-making. In many real-world settings, especially in public policy, models do not simply forecast outcomes. They determine who receives resources, who is prioritized, and who is excluded. In these cases, accuracy alone is rarely the only objective, and sometimes it is not even the most important one.
+
+This post focuses on one such setting: poverty targeting in social assistance programs. It shows why, despite advances in machine learning, simple and interpretable models continue to dominate in practice.
+
+## When Models Decide, Not Just Predict
+In a typical machine learning workflow, models are evaluated using metrics such as accuracy or AUC. These metrics assume that the goal is to predict an outcome as precisely as possible. 
+
+When a government uses a model to decide eligibility for social assistance, the model’s output becomes a decision. Policymakers must be able to defend that decision. Citizens expect transparency. Legal systems may require that decisions be explainable and open to appeal.
+
+In this setting, a model that performs well but cannot be explained is not just inconvenient, it can be unusable. Even a small improvement in accuracy may not justify the loss of transparency.  As a result, what counts as “good performance” changes.
+
+## Poverty Targeting: A High-Stakes Data Science Problem
+Poverty targeting refers to the process of identifying which households should receive social assistance when resources are limited. There is a fundamental question brought to the  governments and international organizations: who should receive support, and who should not?
+
+From a data science perspective, this looks like a standard classification or ranking problem. Given household data, we try to identify those most in need. But in practice, it is also a political and social problem. Errors are visible, personal, and contested. 
+Excluding a poor household can have serious consequences for food security, education, or healthcare. Including a household that is perceived as “not poor enough” can trigger public criticism and undermine trust in the system.
+
+Because of this, poverty targeting systems are expected to be fair, consistent, and stable over time. These expectations strongly influence which models can actually be used.
+
+## Why Simple Models Work Better in Poverty Targeting
+In practice, poverty targeting systems around the world rely heavily on simple models. This is not because governments are unaware of newer techniques, but because simple models fit the problem better.
+
+First, decisions must be explainable and contestable. When a household is denied benefits, it should be possible to explain why in plain terms.  Simple models allow governments to point to the observable characteristics, such as household size, education level, and housing quality, and explain how these contributed to the final decision.Complex models often struggle to provide explanations that feel intuitive or convincing to non-technical audiences.
+
+Second, governance and oversight matter. Social assistance programs must be audited and monitored. Simple models are easier to inspect, test, and debug. Their logic can be reviewed by policymakers. Complex models require specialized expertise to interpret, which raises barriers to oversight.
+
+Third, stability often matters more than marginal accuracy. Rules for social assistance cannot change frequently or it could create confusion and unfairness. Simple models tend to be more stable, while complex models can produce different outcomes after retraining, even when underlying conditions have not changed much.
+
+## The Proxy Means Test: A Simple Model That Works
+One of the most common tools used in poverty targeting is the Proxy Means Test (PMT). A PMT estimates household welfare using observable characteristics such as assets, education, housing quality, and household composition. Each feature is assigned a weight, and the total score determines eligibility.
+
+Statistically, a PMT is a linear scorecard, it aggregates all scores, usually weighted, to provide a single overall rating.  It is similar to the models such as linear models or logistic regression models. Although the model is simple, it is based on real data showing how household characteristics relate to poverty
+
+The strength of PMTs comes from their transparency. The scoring rule can be published, replicated, and explained. Households can verify their information, and governments can audit outcomes. These properties make PMTs practical at scale, even if they do not achieve the highest possible predictive accuracy.
+
+## Where Complex Models Fit, and Where They Don’t
+Recent studies have explored using machine learning to improve poverty targeting, often relying on alternative data sources such as mobile phone records or satellite imagery. These approaches are attractive because they can reduce data collection costs and scale quickly in settings where traditional household surveys are expensive or outdated. For example, @aiken2022 use mobile phone metadata to predict poverty and target emergency cash transfers in Togo, showing that machine learning can improve targeting when conventional data are unavailable.
+
+However, evidence also suggests that greater model complexity does not always lead to better outcomes. @aiken2025 compare traditional Proxy Means Tests with machine-learning-based targeting methods using mobile phone data. They find that when high-quality survey data are available, PMTs often perform as well as or better than more complex models, while machine learning mainly offers advantages in scalability and cost. This highlights that the choice of model depends on context rather than complexity alone.
+This does not mean that machine learning has no role in poverty targeting. It means that the “better” model depends on what kind of failure matters most. If the main risk is limited coverage, a complex machine learning  model may help. If the main concern is whether decisions can be justified and trusted, simpler models are safer.
+
+## What Poverty Targeting Teaches Us About Model Choice
+The case of poverty targeting illustrates a broader lesson for data science practice. Model selection should not be driven solely by benchmark performance. In high-stakes domains, interpretability, auditability, and trust are part of the objective function.
+When models allocate resources rather than predict outcomes, accuracy alone is not enough. The best model is not the one with the highest score on a validation set, but the one that works within real institutional constraints.
+
+When accuracy is not the objective function, complex models lose their advantage.
+
+## References
